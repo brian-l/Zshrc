@@ -1,0 +1,23 @@
+# Brian's Zshrc
+
+Simple zsh prompt with a few features:
+
+* Case insensitivity to directories - typing `cd documents` and hitting <tab> will correct to `cd Documents` if Documents exists.
+* Easy initscript (/etc/init.d) use through svc()
+* Git shortcuts - gitlog, deploy
+* Useful tricks such as:
+	* Colored grep matches
+	* UTF8 character encoding
+	* `ls` on directory change
+
+## Setup
+
+For some users it may be required to set the following to allow UTF8 characters:
+
+	LANG="en_US.UTF-8"
+	export LC_CTYPE="$LANG"
+	printf "\33]701;$LC_CTYPE\007"
+
+In order to use the deploy function, git must be installed. In addition, you must be in the current working directory of the git repository you want to use, because the function checks the local config for commit information.
+
+To install the zshrc, backup your old $HOME/.zshrc (if you wish to save it) and copy this zsh to $HOME/.zshrc . Execute `source ~/.zshrc` and thats it, your new zshrc is installed!
