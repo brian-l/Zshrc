@@ -124,8 +124,13 @@ deploy() #quick deployment of code in a git repository
 {
 	if [ -d ".git" ]
 	then
-		echo -n "Enter a message: "
-		read message
+		if [ "$1" = "" ]
+		then
+			echo -n "Enter a message: "
+			read message
+		else
+			message=$1
+		fi
 		git add .
 		git commit -m $message
 		origin=$(git config --local --get branch.master.remote)
