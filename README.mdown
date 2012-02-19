@@ -2,7 +2,7 @@
 
 Simple zsh prompt with a few features:
 
-* Case insensitivity to directories - typing `cd documents` and hitting <tab> will correct to `cd Documents` if Documents exists.
+* Case insensitivity to directories - typing `cd documents` and hitting tab will correct to `cd Documents` if Documents exists.
 * Easy initscript (/etc/init.d) use through svc()
 * Git shortcuts - gitlog, deploy
 * Useful tricks such as:
