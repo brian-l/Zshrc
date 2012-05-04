@@ -35,20 +35,35 @@ then
 	LOC="%{$red%}%n$red@$cyan%m"
 fi
 
+# Use vi keybindings
+bindkey -v
+VIMODE='I'
+
 ## Prompt ##
 ## You must have UTF8 encoding to use these characters
 #The prompt will look something like
 # ┌-<user@host>-<working directory>
 # └-<current command
-prompt="$red┌─$left$cyan$LOC$right$red─$left$WD$right
-$red└─$left%{$reset_color%}"
-PS2='%(4_.\.)%3_> %E'
+BASIC="${red}┌─${left}${cyan}${LOC}${right}${red}─${left}${WD}${right}${red}-${left}${green}${VIMODE}${right}
+${red}└─${left}%{$reset_color%}"
+
+PROMPT=$BASIC
+PROMPT2='%(4_.\.)%3_> %E'
+
+function zle-line-init zle-keymap-select 
+{
+	VIMODE="${${KEYMAP/vicmd/C}/(main|viins)/I}"
+BASIC="${red}┌─${left}${cyan}${LOC}${right}${red}─${left}${WD}${right}${red}-${left}${green}${VIMODE}${right}
+${red}└─${left}%{$reset_color%}"
+	PROMPT="${BASIC}"
+    zle reset-prompt
+}
+
+zle -N zle-keymap-select
+zle -N zle-line-init
 
 promptinit
 setopt histignorealldups sharehistory extendedglob nobeep autolist nocasematch markdirs nomatch correct share_history inc_append_history
-
-# Use emacs keybindings even if our EDITOR is set to vi
-bindkey -e
 
 # Keep 2000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=2000
